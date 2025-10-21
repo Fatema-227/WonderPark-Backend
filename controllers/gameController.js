@@ -1,32 +1,40 @@
-const Game=require('../models/Game')
+const Game = require('../models/Game')
 
-const getGames=async()=>{
- return await Game.find()
-}
-
-const getGameById=async(id)=>{
-  return await Game.findById(id)
-}
-
-const createGame=async(gameData)=>{
-  return await Game.create(gameData)
-}
-
-const deleteGame= async(id)=>{
-  const game=await Game.findById(id)
-
-  if(!game){
-    return 'Game not found'
+// Get all games
+const getGames = async (req, res) => {
+  try {
+    const games = await Game.find({})
+    res.status(200).send(games)
+  } catch (error) {
+    res.status(500).send({ msg: "Error getting all games!", error:error.message })
   }
-
-  await game.deleteOne()
-  return'Game delete successfully'
 }
 
+// Create a new game
+const createGame = async (req, res) => {
+  try {
+    const newGame = await Game.create(req.body)
+    res.status(200).send(newGame)
+  } catch (error) {
+    res.status(500).send({ msg: "Error creating a new game!", error:error.message })
+  }
+}
 
-module.exports={
+// Delete a game
+const deleteGame = async (req, res) => {
+  try {
+    const game = await Game.findById(req.params.id)
+    if (!game) return res.status(404).send({ msg: "Game not found!" })
+
+    await game.deleteOne()
+    res.status(200).send({ msg: "Game deleted successfully!" })
+  } catch (error) {
+    res.status(500).send({ msg: "Error deleting the game!", error:error.message  })
+  }
+}
+
+module.exports = {
   getGames,
-  getGameById,
   createGame,
   deleteGame
 }
