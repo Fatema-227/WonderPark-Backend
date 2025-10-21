@@ -11,15 +11,11 @@ const gameSchema=new mongoose.Schema({
   },
   category:{
     type:String,
-    required:true
+    required:true,
+    enum: ["Action", "Adventure", "Puzzle", "Sports", "Racing", "Strategy"]
   },
   img:{
     type:String,
-    required:true
-  },
-  user_id:{
-    type:mongoose.Schema.Types.ObjectId, // Like an ID number in MongoDB
-    ref:"User",
     required:true
   }
   })
