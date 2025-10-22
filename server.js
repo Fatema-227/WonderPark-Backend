@@ -17,7 +17,7 @@ app.use(logger('dev'))
 app.use('/games',gameRoutes)
 app.use('/ratings', ratingRoutes);
 
-app.get('/games',(req,res)=>{
+app.get('/',(req,res)=>{
   res.send('Theme Park API is running..')
 })
 
