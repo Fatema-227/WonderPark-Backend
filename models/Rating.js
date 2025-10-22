@@ -6,8 +6,8 @@ const ratingSchema = new mongoose.Schema({
     ref: "Game",
     required: true,
   },
-  value: {
-    type: Number,
+  rating: {
+    type: String,
     min: 1,
     max: 5,
     required: true,
@@ -16,5 +16,5 @@ const ratingSchema = new mongoose.Schema({
     type: String,
   },
 })
-
-module.exports = mongoose.model("Rating", ratingSchema)
+const Rating = mongoose.model("Rating", ratingSchema)
+module.exports = Rating
