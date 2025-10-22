@@ -1,15 +1,15 @@
-const mongoose = require('mongoose')
-require('dotenv').config()
+const mongoose = require("mongoose")
+require("dotenv").config()
 
-mongoose.set('strictQuery', false)
+mongoose.set("strictQuery", false)
 // mongoose.set('debug', true)
 
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI)
-    console.log('Successfully connected to MongoDB . . .')
+    console.log("Successfully connected to MongoDB . . .")
   } catch (error) {
-    console.error('Connection error', error.message)
+    console.error("Connection error", error.message)
   }
 }
 
